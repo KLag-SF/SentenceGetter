@@ -18,8 +18,7 @@ def main_routine(word):
     sentence = []
 
     for i in ls_sentence:
-        content = i.get_text()
-        sentence.append(content)
+        sentence.append(i.get_text())
 
     if len(sentence) == 0:
         print("\nNot Found.\n")
