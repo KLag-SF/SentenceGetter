@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup as bs
 import requests as req
+import random
 
 def print_sentence(sentence):
     delimiter = "-*-" * 25
@@ -7,6 +8,13 @@ def print_sentence(sentence):
     for i in sentence:
         print(i)
     print(delimiter + "\n")
+
+
+def random_util():
+    ls = list(range(1, 36))
+    sel = random.sample(ls, 15)
+    sel.sort()
+    print(sel + "\n")
 
 
 def main_routine(word):
@@ -18,7 +26,9 @@ def main_routine(word):
     sentence = []
 
     for i in ls_sentence:
-        sentence.append(i.get_text())
+        content = i.get_text()
+        if content[2].isupper() and content[-1] == ".":
+            sentence.append(content)
 
     if len(sentence) == 0:
         print("\nNot Found.\n")
@@ -26,11 +36,18 @@ def main_routine(word):
         print_sentence(sentence)
 
 
-print("LDOCE Example Sentence Getter    Version-Beta.1")
-print("Press Ctrl+C to Exit.\n")
+print("\n" + "-*-" * 5 + "LDOCE Example Sentence Getter Version Beta.4" + "-*-" * 5)
+print("Press Ctrl+C to Exit.")
+print('Type "/ran" to select 15 numbers from 1 - 35\n')
 
 try:
     while 1:
-        main_routine(input("Word? > "))
+        word = input("word? > ")
+
+        if word == "/ran":
+            random_util()
+        else:
+            main_routine(word)
+
 except KeyboardInterrupt:
     print("\nProgram was terminated.")
